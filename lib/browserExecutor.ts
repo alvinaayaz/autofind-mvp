@@ -20,9 +20,17 @@ export type BrowserActionResult = {
 };
 
 async function createBrowser(): Promise<Browser> {
+  const isWindows = process.platform === "win32";
+
+  if (isWindows) {
+    return chromium.launch({
+      executablePath: CHROME_PATH,
+      headless: false,
+    });
+  }
+
   return chromium.launch({
-    executablePath: CHROME_PATH,
-    headless: false,
+    headless: true,
   });
 }
 
@@ -259,9 +267,7 @@ async function extractGenericJobLinks(
           lower.includes("position") ||
           lower.includes("opening");
 
-        if (!looksLikeJob) {
-          continue;
-        }
+        if (!looksLikeJob) continue;
 
         if (
           !href.startsWith(
