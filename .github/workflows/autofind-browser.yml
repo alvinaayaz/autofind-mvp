@@ -1,0 +1,33 @@
+name: AutoFind Browser Job
+
+on:
+  repository_dispatch:
+    types: [autofind-job]
+
+jobs:
+  run-browser-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run AutoFind browser job
+        env:
+          AUTOFIND_JOB_ID: ${{ github.event.client_payload.jobId }}
+          AUTOFIND_STAGE: ${{ github.event.client_payload.stage }}
+          AUTOFIND_WORKER_URL: https://autofind-mvp.alvinaayaz5-1b2.workers.dev
+          GITHUB_ACTIONS_TOKEN: ${{ secrets.AUTOFIND_GITHUB_TOKEN }}
+        run: node scripts/autofind-github-job.mjs

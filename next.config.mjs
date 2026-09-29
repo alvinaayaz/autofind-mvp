@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  serverExternalPackages: [
+    "@cloudflare/playwright",
+  ],
+};
 
 export default nextConfig;

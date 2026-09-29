@@ -1,0 +1,32 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "autofind-mvp",
+	"compatibility_date": "2026-09-26",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"main": "vinext/server/fetch-handler",
+	"browser": {
+		"binding": "BROWSER"
+	},
+	"assets": {
+		"directory": "dist/client",
+		"not_found_handling": "none",
+		"binding": "ASSETS"
+	},
+	"images": {
+		"binding": "IMAGES"
+	},
+	"version_metadata": {
+		"binding": "CF_VERSION_METADATA"
+	},
+	"cache": {
+		"enabled": false
+	},
+	"kv_namespaces": [
+		{
+			"binding": "AUTOFIND_JOBS",
+			"id": "ce5ebecab4794629b8c4f4979e58a03f"
+		}
+	]
+}
