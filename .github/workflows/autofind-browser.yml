@@ -29,5 +29,5 @@ jobs:
           AUTOFIND_JOB_ID: ${{ github.event.client_payload.jobId }}
           AUTOFIND_STAGE: ${{ github.event.client_payload.stage }}
           AUTOFIND_WORKER_URL: https://autofind-mvp.alvinaayaz5-1b2.workers.dev
-          GITHUB_ACTIONS_TOKEN: ${{ secrets.GITHUB_ACTIONS_TOKEN }}
+          GITHUB_ACTIONS_TOKEN: ${{ secrets.AUTOFIND_GITHUB_TOKEN }}
         run: node scripts/autofind-github-job.mjs
